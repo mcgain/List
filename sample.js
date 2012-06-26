@@ -1,11 +1,14 @@
 $(document).ready(function() {
-  $("td").hover(editableIn, editableOut).click(editableClick);
-  $("#currentlyEditableField").change(submitEditableField);
+  addEventsToCells();
 });
 
+function addEventsToCells() {
+  $("td").hover(editableIn, editableOut).click(editableClick);
+}
+
 function submitEditableField() {
-  alert("Value: " + $(this).value);
-  $(this).replaceWith($(this).value);
+  $(this).replaceWith($(this).val());
+  addEventsToCells();
 }
 
 function editableIn() {
