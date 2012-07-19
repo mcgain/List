@@ -5,3 +5,38 @@ td {
 .editable {
   background-color: gray;
 }
+
+.add-column {
+  display: inline-block;
+  float: right;
+}
+
+.add-column a {
+  height: 100px;
+}
+
+.add-column a:hover {
+  background-color: blue;
+}
+
+.add-row a {
+  width: 100%;
+}
+
+.add-row a:hover {
+  background-color: blue;
+}
+
+.list {
+  width: 400px;
+}
+
+table {
+  display: inline-block;
+  border-collapse: collapse;
+  float: left;
+}
+
+* {
+  background-color: #666666;
+}
