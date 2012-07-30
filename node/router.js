@@ -1,4 +1,4 @@
-function route(pathname, static_handler, list_handler) {
+function get_handler(pathname, static_handler, list_handler) {
   console.log("About to route a request for " + pathname);
   var nodes = pathname.toUpperCase().split('/');
   console.log(nodes);

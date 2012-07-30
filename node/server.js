@@ -6,7 +6,7 @@ function start(route, static_handler, list_handler) {
     var pathname = url.parse(request.url).pathname;
     console.log("Request for " + pathname + " received.");
     
-    route(pathname static_handler, list_handler);
+    route(pathname, static_handler, list_handler);
 
     response.end();
   }
