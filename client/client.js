@@ -18,11 +18,8 @@ var updateDatasource = function(data, source) {
   var col = data[0][1];
   var change = data[0][3];
   var entries = Table.findOne().table;
-  console.log("Entries: " + entries + " Change: " + change + " col:" + col + " row: " + row);
   entries[row][col] = change;
-  console.log("XXXX Entries: " + entries + " Change: " + change);
   Table.update({table_id: "something"}, {$set: {table: entries}});
   $("#main-table").handsontable("loadData", entries);
-  console.log("inserting " + change);
 };
 
