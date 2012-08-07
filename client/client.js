@@ -12,6 +12,10 @@ var data = Meteor.subscribe("datatable", "something", function(){
   $("#main-table").handsontable("loadData", entries);
 });
 
+Template.mainTemplate.tableName = function() {
+  return "WHAYTTT@";
+}
+
 var updateDatasource = function(data, source) {
   if (source === "loadData") {
     return;

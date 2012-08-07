@@ -1,10 +1,13 @@
 <head>
-  <title> XXX</title>
+  <title>List</title>
 </head>
 
 <body>
-  <h1>Hi Megan</h1>
-  <div id="main-table" class="dataTable">
-  </div>
+  {{> mainTemplate}}
 </body>
 
+<template name="mainTemplate">
+  <h1>{{tableName}}</h1>
+  <div id="main-table" class="dataTable">
+  </div>
+</template>
