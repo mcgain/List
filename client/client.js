@@ -5,6 +5,8 @@ var data = Meteor.subscribe("datatable", "something", function(){
   $("#main-table").handsontable({
     rows: 2, 
     cols: 3,
+    minSpareCols: 1,
+    minSpareRows: 1,
     onChange: updateDatasource
   });
   $("#main-table").handsontable("loadData", entries);
