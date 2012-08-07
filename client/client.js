@@ -20,8 +20,19 @@ var updateDatasource = function(data, source) {
   var col = data[0][1];
   var change = data[0][3];
   var entries = Table.findOne().table;
-  entries[row][col] = change;
+  insertData(row, col, change, entries);
   Table.update({table_id: "something"}, {$set: {table: entries}});
   $("#main-table").handsontable("loadData", entries);
 };
+
+var insertData = function(row, col, value, entries) {
+  if(entries[row] === undefined) {
+    newRow = []; 
+    newRow[col] = value; 
+    entries[row] = newRow;
+  } 
+  else{
+    entries[row][col] = value;
+  }
+}
 
