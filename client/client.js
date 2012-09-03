@@ -39,4 +39,20 @@ var insertData = function(row, col, value, entries) {
     entries[row][col] = value;
   }
 }
+var ListsRouter = Backbone.Router.extend({
+  routes: {
+    ":list_name": "main"
+  },
+  main: function (list_id) {
+    Session.set("list_id", list_id);
+  },
+  setList: function (list_id) {
+    console.log("setList called");
+    this.navigate(list_id, true);
+  }
+});
+
+Router = new ListsRouter;
+
+Backbone.history.start({pushState: true});
 
