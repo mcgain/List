@@ -13,7 +13,7 @@ var data = Meteor.subscribe("datatable", "something", function(){
 });
 
 Template.mainTemplate.tableName = function() {
-  return "WHAYTTT@";
+  return Session.get("list_id");
 }
 
 var updateDatasource = function(data, source) {
