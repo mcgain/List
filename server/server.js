@@ -1,6 +1,4 @@
-var require = __meteor_bootstrap__.require;
-
-Table = new Meteor.Collection("datatable");
+var Table = new Meteor.Collection("datatable");
 
 Meteor.publish("datatable", function(datatable_id) {
   return Table.find({table_id: datatable_id});

@@ -1,58 +1,60 @@
-var Table = null;
-var data = Meteor.subscribe("datatable", "something", function(){
-  Table = new Meteor.Collection("datatable");
-  var entries = Table.findOne().table;
-  $("#main-table").handsontable({
-    rows: 2, 
-    cols: 3,
-    minSpareCols: 1,
-    minSpareRows: 1,
-    onChange: updateDatasource
+(function() {
+  var Table = null;
+  var data = Meteor.subscribe("datatable", "something", function(){
+    Table = new Meteor.Collection("datatable");
+    var entries = Table.findOne().table;
+    $("#main-table").handsontable({
+      rows: 2, 
+      cols: 3,
+      minSpareCols: 1,
+      minSpareRows: 1,
+      onChange: updateDatasource
+    });
+    $("#main-table").handsontable("loadData", entries);
   });
-  $("#main-table").handsontable("loadData", entries);
-});
 
-Template.mainTemplate.tableName = function() {
-  return Session.get("list_id");
-}
+  Template.mainTemplate.tableName = function() {
+    return Session.get("list_id");
+  };
 
-var updateDatasource = function(data, source) {
-  if (source === "loadData") {
-    return;
-  }
-  var row = data[0][0];
-  var col = data[0][1];
-  var change = data[0][3];
-  var entries = Table.findOne().table;
-  insertData(row, col, change, entries);
-  Table.update({table_id: "something"}, {$set: {table: entries}});
-  $("#main-table").handsontable("loadData", entries);
-};
+  var updateDatasource = function(data, source) {
+    if (source === "loadData") {
+      return;
+    }
+    var row = data[0][0];
+    var col = data[0][1];
+    var change = data[0][3];
+    var entries = Table.findOne().table;
+    insertData(row, col, change, entries);
+    Table.update({table_id: "something"}, {$set: {table: entries}});
+    $("#main-table").handsontable("loadData", entries);
+  };
 
-var insertData = function(row, col, value, entries) {
-  if(entries[row] === undefined) {
-    newRow = []; 
-    newRow[col] = value; 
-    entries[row] = newRow;
-  } 
-  else{
-    entries[row][col] = value;
-  }
-}
-var ListsRouter = Backbone.Router.extend({
-  routes: {
-    ":list_name": "main"
-  },
-  main: function (list_id) {
-    Session.set("list_id", list_id);
-  },
-  setList: function (list_id) {
-    console.log("setList called");
-    this.navigate(list_id, true);
-  }
-});
+  var insertData = function(row, col, value, entries) {
+    if(entries[row] === undefined) {
+      var newRow = []; 
+      newRow[col] = value; 
+      entries[row] = newRow;
+    } 
+    else{
+      entries[row][col] = value;
+    }
+  };
 
-Router = new ListsRouter;
+  var ListsRouter = Backbone.Router.extend({
+    routes: {
+      ":list_name": "main"
+    },
+      main: function (list_id) {
+        Session.set("list_id", list_id);
+      },
+      setList: function (list_id) {
+        console.log("setList called");
+        this.navigate(list_id, true);
+      }
+  });
 
-Backbone.history.start({pushState: true});
+  var Router = new ListsRouter();
 
+  Backbone.history.start({pushState: true});
+}());
