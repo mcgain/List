@@ -44,7 +44,7 @@
     var change = data[0][3];
     var entries = Table.findOne().table;
     insertData(row, col, change, entries);
-    Table.update({table_id: "something"}, {$set: {table: entries}});
+    Table.update({table_id: Session.get("list_id")}, {$set: {table: entries}});
     $("#main-table").handsontable("loadData", entries);
   };
 
