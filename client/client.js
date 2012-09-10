@@ -1,10 +1,10 @@
 (function() {
   var ListsRouter = Backbone.Router.extend({
     routes: {
-      ":list_name": "main"
+      ":list_url": "main"
     },
-    main: function (list_id) {
-      Session.set("list_id", list_id);
+    main: function (list_url) {
+      Session.set("list_id", list_url);
     },
     setList: function (list_id) {
       this.navigate(list_id, true);
