@@ -1,35 +1,21 @@
-(function() {
-  var ListsRouter = Backbone.Router.extend({
-    routes: {
-      ":list_url": "main"
-    },
-    main: function (list_url) {
-      Session.set("list_id", list_url);
-    },
-    setList: function (list_id) {
-      this.navigate(list_id, true);
-    }
-  });
+console.log("main loading");
+  var renderPage = function() {
+    var Table = null;
 
-  var Router = new ListsRouter();
-
-  Backbone.history.start({pushState: true});
-
-  var Table = null;
-
-  var datatable_id = Session.get("list_id");
-  var data = Meteor.subscribe("datatable", datatable_id, function() {
-    Table = new Meteor.Collection("datatable");
-    var entries = Table.findOne().table;
-    $("#main-table").handsontable({
-      rows: 3, 
-      cols: 1,
-      minSpareCols: 1,
-      minSpareRows: 1,
-      onChange: updateDatasource
+    var datatable_id = Session.get("list_id");
+    var data = Meteor.subscribe("datatable", datatable_id, function() {
+      Table = new Meteor.Collection("datatable");
+      var entries = Table.findOne().table;
+      $("#main-table").handsontable({
+        rows: 3, 
+        cols: 1,
+        minSpareCols: 1,
+        minSpareRows: 1,
+        onChange: updateDatasource
+      });
+      $("#main-table").handsontable("loadData", entries);
     });
-    $("#main-table").handsontable("loadData", entries);
-  });
+  };
 
   Template.mainTemplate.tableName = function() {
     return Session.get("list_id");
@@ -60,4 +46,3 @@
     }
   };
 
-}());

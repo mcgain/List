@@ -1,0 +1,3 @@
+Routing.start();
+renderPage();
+
