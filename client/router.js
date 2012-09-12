@@ -13,7 +13,8 @@ var Routing = {
     });
 
     var Router = new ListsRouter();
-
+  },
+  startHistory: function() {
     Backbone.history.start({pushState: true});
   }
 };

@@ -1,4 +1,3 @@
-console.log("main loading");
   var renderPage = function() {
     var Table = null;
 
