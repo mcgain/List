@@ -1,19 +1,32 @@
+"use strict";
 /*global module:false*/
+
 module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
-    lint: {
-      files: ['grunt.js', '../server/*.js', '../client/*.js', '../tests/**/*.js']
-    },
     qunit: {
       files: ['../tests/*.html']
+    },
+    jasmine: {
+        src: ['../client/router.js'],
+        spec: ['../tests/jasmine/*.js'],
+        errorReporting: true
     },
     watch: {
       files: '<config:lint.files>',
       tasks: 'lint qunit'
     },
     jshint: {
+      all: [
+        'Gruntfile.js', 
+        '../server/server.js', 
+        '../client/router.js', 
+        '../client/main.js', 
+        '../client/client.js', 
+        '../tests/smoke/*.js',
+        '../tests/unit/*.js'
+      ],
       options: {
         bitwise: true,
         curly: true,
@@ -31,9 +44,9 @@ module.exports = function(grunt) {
         indent: 2,
         nonew: true,
         regexp: true,
-        unused: true,
-        maxdepth: 3,
-        maxstatements: 7,
+        //unused: true,
+        //maxdepth: 3,
+        //maxstatements: 7,
         jquery: true,
         node: true
       },
@@ -45,8 +58,10 @@ module.exports = function(grunt) {
       }
     }
   });
-
   // Default task.
-  grunt.registerTask('default', 'lint qunit');
+  grunt.registerTask('default', ['jshint', 'qunit']);
 
+  grunt.loadNpmTasks('grunt-jasmine-task');
 };
+
+
