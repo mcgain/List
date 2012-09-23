@@ -1,3 +1,5 @@
+"use strict";
+/*global Backbone: false, Session: true */
 var Routing = {
   start: function() {
     var ListsRouter = Backbone.Router.extend({
@@ -11,8 +13,8 @@ var Routing = {
         this.navigate(list_id, true);
       }
     });
-
     var Router = new ListsRouter();
+    Router.navigate(Session.get("list_id"),{});
   },
   startHistory: function() {
     Backbone.history.start({pushState: true});
